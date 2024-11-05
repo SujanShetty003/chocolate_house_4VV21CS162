@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Chocolate House</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        h1 {
+            color: #3b3b3b;
+        }
+        form {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        input, textarea {
+            margin: 5px 0;
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Chocolate House !</h1>
+    <p> Share ypur delicious ideas with us !</p>
+
+
+    <h2>Add a seasonal Flavour</h2>
+    <from id = "flavour-form">
+        <input type="text" id = "flavour_name" placeholder="Flavour Name" required>
+        <input type="text" id = "availability" placeholder="Availability Season" required>
+        <button type = "submit">Add Flavor</button>
+
+    </from>
+
+
+    <h2>Add an Ingredient</h2>
+    <from id = "ingredient-form">
+        <input type="text" id = "ingredient_name" placeholder="Ingredient Name" required>
+        <input type="number" id = "quantity" placeholder="Quantity" required>
+
+        <button type = "submit">Add ingredient</button>
+
+    </from>
+
+
+    <h2>suggest a Flavor</h2>
+    <from id = "suggestion-form">
+        <input type="text" id = "customer_name" placeholder="Your Name" required>
+        <input type="text" id = "Flavor_suggestion" placeholder="Suggested Flavor" required>
+        <textarea id ='allergy_concern' placeholder="Any Allergy Information?" required></textarea>
+        <button type = "submit">Send Suggestions </button>
+
+    </from>
+
+
+    <Script>
+        const handleFormSubmit = (formID, url, data) => {
+            document.getElementById(formId).addEventListener('submit', function(e) {
+
+                e.preventDefault();
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'appliaction/json',
+                },
+                body: JSON.stringify(data)
+
+            })
+            .then(reponse => response.json())
+            .then(data => {
+                alert(data.message);
+                this.reset();
+            })
+            .catch(error => console.error('Error:', error));
+
+            });
+
+        };
+
+        handleFormSubmit('flavor-form', '/flavors', {
+
+            flavor_name: () => document.getElementById('flavor_name').value,
+            availability: () => document.getElementById('availability').value
+
+        });
+
+
+        handleFormSubmit('ingredents-form', 'ingredients', {
+
+            ingredient_name: () => document.getElementById('ingredient_name').value,
+            quantuty: () => document.getElementById('quantity').value
+
+        });
+        handleFormSubmit('suggestion-form', '/suggestions', {
+
+            customer_name: () => document.getElementById('customer_name').value,
+            flavor_suggestion: () => document.getElementById('flavor_suggestion').value,
+            allergy_concern: () =>  document.getElementById('allery_concern').value
+
+        });
+
+
+
+
+            
+        
+    
+    </Script>
+</body>
+</html>
+
+    
